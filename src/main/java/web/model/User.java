@@ -3,7 +3,7 @@ package web.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name ="user")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -18,7 +18,8 @@ public class User {
     @Column(name = "age", length = 3)
     private int age;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String name, String lastname, int age) {
         this.name = name;
@@ -26,7 +27,9 @@ public class User {
         this.age = age;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

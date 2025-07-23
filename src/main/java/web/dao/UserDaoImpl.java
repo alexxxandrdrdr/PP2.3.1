@@ -5,17 +5,12 @@ import jakarta.persistence.EntityManagerFactory;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
-
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 @Repository
 
 public class UserDaoImpl implements UserDao {
 
-    private static final Logger log = Logger.getLogger(UserDaoImpl.class.getName());
     EntityManagerFactory emf;
     EntityManager em;
 
@@ -30,7 +25,6 @@ public class UserDaoImpl implements UserDao {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
-        log.info(" FROM USERDAO: added user: " + user.toString());
     }
 
     @Override
@@ -39,8 +33,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(int id, String name,String lastname, int age) {
-        User dbUser = em.find(User.class, id) ;
+    public void updateUser(int id, String name, String lastname, int age) {
+        User dbUser = em.find(User.class, id);
         if (dbUser != null) {
             try {
                 em.getTransaction().begin();
@@ -48,10 +42,9 @@ public class UserDaoImpl implements UserDao {
                 dbUser.setLastname(lastname);
                 dbUser.setAge(age);
                 em.getTransaction().commit();
-                log.info(" FROM USERDAO: updated user: " + dbUser);
+
             } catch (RuntimeException e) {
                 em.getTransaction().rollback();
-                log.log(Level.WARNING, e.getMessage());
             }
         }
     }
@@ -61,7 +54,6 @@ public class UserDaoImpl implements UserDao {
         em.getTransaction().begin();
         em.remove(em.find(User.class, id));
         em.getTransaction().commit();
-        log.info(" FROM USERDAO: deleted user");
     }
 
     @Override
