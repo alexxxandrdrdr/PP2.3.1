@@ -13,11 +13,11 @@ public class UsersController {
 
     private final UserService userService;
 
-    UsersController(UserService userService) {
+    public UsersController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping( "/")
     public String getUsers(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("users", userService.getUsersList());
         return "users";

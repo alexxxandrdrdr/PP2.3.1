@@ -8,11 +8,10 @@ import web.model.User;
 import java.util.List;
 
 @Repository
-
 public class UserDaoImpl implements UserDao {
 
-    EntityManagerFactory emf;
-    EntityManager em;
+    private final EntityManagerFactory emf;
+    private final EntityManager em;
 
     public UserDaoImpl(EntityManagerFactory emf) {
         this.emf = emf;
@@ -21,10 +20,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-
-        em.getTransaction().begin();
         em.persist(user);
-        em.getTransaction().commit();
     }
 
     @Override
